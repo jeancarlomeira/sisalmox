@@ -1,0 +1,27 @@
+{% extends "catalog/index.html" %}
+
+{% block title %}
+  {{ product }} | {{ block.super }}
+{% endblock %}
+
+{% block catalog_container %}
+<div class="page-header">
+  <h1>{{ product }}</h1>
+</div>
+<div class="row">
+  <div class="col-sm-9">
+    <label>Código: </label>
+      {{ product.codigo }}
+    </p>
+    <label>Descrição: </label>
+      {{ product.description }}
+    </p>
+    <label>Unidade: </label>
+      {{ product.unid }}
+    </p>
+    <p class="text-right">
+      <a href="{% url 'checkout:add_cart' product.slug %}" class="btn btn-primary">Adicionar ao Pedido</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

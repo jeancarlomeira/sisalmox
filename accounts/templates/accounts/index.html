@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Minha Conta{% endblock %}
+
+{% block container %}
+<div class="col-md-8">
+  <h1>Bem vindo {{ user }}</h1>
+</div>
+
+<div class="col-md-8">
+  {% block accounts_container %}{% endblock %}
+</div>
+{% endblock %}

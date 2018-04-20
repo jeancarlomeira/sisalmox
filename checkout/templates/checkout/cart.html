@@ -1,0 +1,70 @@
+{% extends "catalog/index.html" %}
+
+{% load widget_tweaks %}
+
+{% block title %}
+Relação de Materiais
+{% endblock %}
+
+{% block catalog_container %}
+<div class="page-header">
+    <h1 class="text-center">Relação de Materiais do Pedido</h1>
+</div>
+<div class="row">
+    <div class="col-md-9 col-md-offset-1">
+        <form class="" action="" method="post">
+            {% csrf_token %}
+            {{ formset.management_form }}
+            <table class="table table-bordered">
+                <thead>
+                    <th width="50">
+                        Item
+                    </th>
+                    <th>
+                        Descrição
+                    </th>
+                    <th>
+                        Unidade
+                    </th>
+                    <th class="text-center" style="width: 10%;">
+                        Quantidade
+                    </th>
+                    <th>
+                      Ação
+                    </th>
+                </thead>
+                <tbody>
+                    {% for form in formset %}
+                        <tr>
+                            <td>
+                                {{ forloop.counter }}
+                            </td>
+                            <td>
+                                {{ form.instance.product }}
+                            </td>
+                            <td>
+                                  {{ form.instance.unid }}
+                            </td>
+                            <td>
+                                {% render_field form.quantity class="form-control" %}
+                            </td>
+                            <td class="text-center">
+                                <button value="on" type="submit" name="{{ form.DELETE.html_name }}" class="btn btn-danger btn-sm">Remover</button>
+                                {{ form.id }}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        Pedido vazio
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p class="text-right">
+                <a href="{% url 'catalog:product_list' %}" class="pull-left btn btn-info">Continuar Pedido</a>
+                <button type="submit" class="btn btn-success" name="button">Atualizar Quantidades</button>
+                <a href="{% url 'checkout:confirmation' %}" class="btn btn-primary">Finalizar Pedido</a>
+                <h5 style="color:red; "><b>*ATENÇÃO: Antes de finalizar o seu pedido, clique em ATUALIZAR QUANTIDADES</b></h5>
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}
