@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from catalog.models import Product, Unidades
+from django.contrib import messages
 
 class CartItemManager(models.Manager):
 	def add_item(self,cart_key,product):
@@ -10,10 +11,10 @@ class CartItemManager(models.Manager):
 			cart_item.quantity = cart_item.quantity + 1
 			cart_item.save()
 		else:
-		    created = True
-		    cart_item = CartItem.objects.create(
-		        cart_key=cart_key, product=product, price=product.price, unid=product.unid, codigo=product.codigo, description=product.description
-		    )
+			created = True
+			cart_item = CartItem.objects.create(
+			    cart_key=cart_key, product=product, price=product.price, unid=product.unid, codigo=product.codigo, description=product.description,
+			)
 		return cart_item, created
 
 class CartItem(models.Model):
@@ -34,13 +35,12 @@ class CartItem(models.Model):
 		unique_together = (('cart_key','product'),)
 
 	def sub(self):
-		return self.price * self.quantity
+		sub = 0
+		return sub
 
 	def __str__(self):
 		return '{} [{}]'.format(self.product,self.quantity, self.sub)
 
-	def total(self):
-		return "teste"
 
 class OrderManager(models.Manager):
 	def create_order(self,user,cart_itens):

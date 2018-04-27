@@ -39,26 +39,3 @@ class IndexView(LoginRequiredMixin, TemplateView):
     template_name = 'catalog/index.html'
 
 index = IndexView.as_view()
-
-
-
-
-
-#def unidade(request, slug):
-#    unidade = Product.objects.get(slug=slug)
-#    unid_filter = UnidadeFilter(request.GET, queryset=unidade)
-#    return render(request, 'catalog/product.html', {'filter': unid_filter})
-
-#def product_list(request):
-#    context = {
-#        'product_list': Product.objects.all()
-#    }
-#    return render(request, 'catalog/product_list.html', context)
-
-#def category(request, slug):
-#    category = Category.objects.get(slug=slug)
-#    context = {
-#        'current_category': category,
-#        'product_list': Product.objects.filter(category=category),
-#    }
-#    return render(request, 'catalog/category.html', context)

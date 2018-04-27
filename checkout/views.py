@@ -98,18 +98,6 @@ class OrderDetailView(LoginRequiredMixin, DetailView):
 
 order_detail = OrderDetailView.as_view()
 
-class Confirmation(LoginRequiredMixin, TemplateView):
-    template_name = 'checkout/confirmation.html'
-    def get(self,request,*args,**kwargs):
-        session_key = request.session.session_key
-        if session_key and CartItem.objects.filter(cart_key = session_key).exists():
-            return render(request,'checkout/confirmation.html')
-        else:
-            messages.warning(request,'Não há itens no pedido')
-            return redirect('checkout:cart_item')
-
-confirmation = Confirmation.as_view()
-
 class PrintPdf(LoginRequiredMixin, DetailView):
     template_name = 'checkout/printpdf.html'
     def get_queryset(self):
